@@ -2,6 +2,7 @@ import { Container, Divider, FormControl, Grid, InputLabel, makeStyles, MenuItem
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { EachProduct } from './EachProduct'
+import imgSource from '../../../assets/1.jpg'
 
 const useStyles = makeStyles({
     container:{
@@ -37,8 +38,8 @@ export const SearchPage = () => {
                         <FormControl className={classes.form}>
                             <InputLabel>Sort by</InputLabel>
                             <Select value={sortBy} onChange={handleOnChange} labelId="sort-by-label">
-                                <MenuItem value={"priceUp"}>Price asc</MenuItem>
-                                <MenuItem value={"priceDown"}>Price dsc</MenuItem>
+                                <MenuItem value={"priceUp"}>Price: Low to High</MenuItem>
+                                <MenuItem value={"priceDown"}>Price: High to Low</MenuItem>
                                 <MenuItem value={"name"}>Name</MenuItem>
                                 <MenuItem value={"stock"}>Stock</MenuItem>
                             </Select>
@@ -47,7 +48,12 @@ export const SearchPage = () => {
                 </Grid>
                 <Grid item md={9}>
                     <Paper className={classes.paper} variant="outlined" elevation={0}>
-                        <EachProduct/>
+                        <EachProduct imgSource={imgSource}/>
+                        <EachProduct imgSource={imgSource}/>
+                        <EachProduct imgSource={imgSource}/>
+                        <EachProduct imgSource={imgSource}/>
+                        <EachProduct imgSource={imgSource}/>
+                        <EachProduct imgSource={imgSource}/>
                     </Paper>
                 </Grid>
             </Grid>
