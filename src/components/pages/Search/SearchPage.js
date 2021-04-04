@@ -30,7 +30,7 @@ export const SearchPage = () => {
     return (
         <Container className={classes.container}>
             <Grid container  spacing={3}>
-                <Grid item md={3}>
+                <Grid item md={3} xs={12}>
                     <Paper variant="outlined" elevation={0} className={classes.paper}>
                         <Typography variant="h5" color="textPrimary" noWrap={true}>{word}</Typography>
                         <Typography variant="subtitle2" color="textSecondary">36 results</Typography>
@@ -46,7 +46,7 @@ export const SearchPage = () => {
                         </FormControl>
                     </Paper>
                 </Grid>
-                <Grid item md={9}>
+                <Grid item md={9} xs={12}>
                     <Paper className={classes.paper} variant="outlined" elevation={0}>
                         <EachProduct imgSource={imgSource}/>
                         <EachProduct imgSource={imgSource}/>

@@ -2,7 +2,7 @@ import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import SearchBar from "material-ui-search-bar";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
     appBar:{
@@ -46,9 +46,11 @@ export const Navbar = () => {
 
             <AppBar position="static" className={classes.appBar}>
                 <Toolbar className={classes.toolbar}>
-                    <Typography variant="h6">
-                        ColinShop
-                    </Typography>
+                    <Link to="/" style={{color:'white', textDecoration:'none'}}>
+                        <Typography variant="h6">
+                            ColinShop
+                        </Typography>
+                    </Link>
                     <SearchBar  value={searchValue} onChange={e=>handleOnChange(e)} className={classes.search}/>
                         <ShoppingCartIcon/>                  
                 </Toolbar>
