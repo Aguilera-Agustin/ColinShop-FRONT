@@ -1,8 +1,8 @@
 import { Container, Divider, FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
+import products from '../../../assets/exampleItems'
 import { EachProduct } from './EachProduct'
-import imgSource from '../../../assets/1.jpg'
 
 const useStyles = makeStyles({
     container:{
@@ -26,7 +26,7 @@ export const SearchPage = () => {
     const {word} = useParams()
     const handleOnChange = (e)=>{
         setSortBy(e.target.value)
-    }   
+    }
     return (
         <Container className={classes.container}>
             <Grid container  spacing={3}>
@@ -48,12 +48,7 @@ export const SearchPage = () => {
                 </Grid>
                 <Grid item md={9} xs={12}>
                     <Paper className={classes.paper} variant="outlined" elevation={0}>
-                        <EachProduct imgSource={imgSource}/>
-                        <EachProduct imgSource={imgSource}/>
-                        <EachProduct imgSource={imgSource}/>
-                        <EachProduct imgSource={imgSource}/>
-                        <EachProduct imgSource={imgSource}/>
-                        <EachProduct imgSource={imgSource}/>
+                        {products.map(eachProduct=>((<EachProduct key={eachProduct.id} product={eachProduct}/>)))}
                     </Paper>
                 </Grid>
             </Grid>

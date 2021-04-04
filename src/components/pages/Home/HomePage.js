@@ -25,6 +25,7 @@ const useStyles = makeStyles({
 
 export const HomePage = () => {
     const classes = useStyles()
+    
     return (
         <>
             <ButtonBar/>

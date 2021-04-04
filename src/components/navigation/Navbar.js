@@ -1,8 +1,9 @@
 import { AppBar, Badge, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchBar from "material-ui-search-bar";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link, useHistory } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
     appBar:{
@@ -27,6 +28,7 @@ const useStyles = makeStyles({
 
 export const Navbar = () => {
     const history = useHistory()
+    const cart = useSelector(state=>state.cart.allItems)
     const [searchValue, setSearchValue] = useState('')
     const classes = useStyles()
     const handleSubmit = (e) =>{
@@ -38,9 +40,11 @@ export const Navbar = () => {
             history.push('/')
         }
     }
+
     const handleOnChange = (e)=>{
         setSearchValue(e)
     }
+
     return (
         <form onSubmit={e => handleSubmit(e)}>
 
@@ -54,7 +58,7 @@ export const Navbar = () => {
                     <SearchBar  value={searchValue} onChange={e=>handleOnChange(e)} className={classes.search}/>
                     <Link to="/cart">
                         <IconButton style={{color:'white'}}>
-                            <Badge badgeContent={4} color="secondary">
+                            <Badge badgeContent={cart} color="secondary">
                                 <ShoppingCartIcon/>                  
                             </Badge>
                         </IconButton>
