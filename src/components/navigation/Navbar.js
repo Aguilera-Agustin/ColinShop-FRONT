@@ -1,4 +1,4 @@
-import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Badge, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import SearchBar from "material-ui-search-bar";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -52,7 +52,13 @@ export const Navbar = () => {
                         </Typography>
                     </Link>
                     <SearchBar  value={searchValue} onChange={e=>handleOnChange(e)} className={classes.search}/>
-                        <ShoppingCartIcon/>                  
+                    <Link to="/cart">
+                        <IconButton style={{color:'white'}}>
+                            <Badge badgeContent={4} color="secondary">
+                                <ShoppingCartIcon/>                  
+                            </Badge>
+                        </IconButton>
+                    </Link>
                 </Toolbar>
             </AppBar>
         </form>

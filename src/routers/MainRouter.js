@@ -6,6 +6,7 @@ import {
   Redirect
 } from "react-router-dom";
 import { Navbar } from "../components/navigation/Navbar";
+import { CartPage } from "../components/pages/Cart/CartPage";
 import { HomePage } from '../components/pages/Home/HomePage'
 import { SearchPage } from "../components/pages/Search/SearchPage";
 
@@ -17,6 +18,7 @@ export const MainRouter = () => {
                     <Switch>
                         <Route exact  path="/index" component={HomePage}/>
                         <Route path="/search/:word" component={SearchPage} />
+                        <Route path="/cart" component={CartPage}/>
                         <Redirect to="/index"/>
                     </Switch>
             </>
