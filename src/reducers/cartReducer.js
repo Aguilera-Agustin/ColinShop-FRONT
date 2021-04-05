@@ -3,7 +3,8 @@ import {types} from '../types/types'
 
 const initialState = {
     items: JSON.parse(localStorage.getItem('items')),
-    allItems: allQuantity()
+    allItems: allQuantity(),
+    allMoney: 0
 }
 
 const cartReducer = (state=initialState, action) => {
@@ -12,17 +13,28 @@ const cartReducer = (state=initialState, action) => {
             return {
                 ...state,
                 items: action.payload.items,
-                allItems: action.payload.quantity
+                allItems: action.payload.quantity,
             }
         case types.addItems:
             return {
                 ...state,
                 items: action.payload.items
             }
-        case types.reduceItem:
+        case types.substractItems:
             return {
                 ...state,
-                quantityItems: state.quantityItems-1
+                items: action.payload.items
+            }
+        case types.deleteItem:
+            return {
+                ...state,
+                items: action.payload.items
+            }
+        case types.modifyMoney:
+            console.log(action.payload)
+            return {
+                ...state,
+                money: action.payload.money
             }
     
         default:

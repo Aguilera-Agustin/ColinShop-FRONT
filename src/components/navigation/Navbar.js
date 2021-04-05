@@ -1,5 +1,5 @@
 import { AppBar, Badge, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import SearchBar from "material-ui-search-bar";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link, useHistory } from "react-router-dom";

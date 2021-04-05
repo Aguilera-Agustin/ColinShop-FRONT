@@ -1,5 +1,5 @@
 import { Button, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { refreshItems } from '../../../actions/cartActions'
 import { addItem } from '../../../helpers/cartHelpers'
@@ -32,7 +32,7 @@ export const EachProduct = ({product}) => {
         <>
             <Grid container spacing={6}>
                 <Grid item md={3}>
-                    <img src={product.img} className={classes.img}/>
+                    <img alt={product.name} src={product.img} className={classes.img}/>
                 </Grid>
                 <Grid item md={9} style={{display:'flex', flexDirection:'column'}}>
                     <Typography variant="h6">                    

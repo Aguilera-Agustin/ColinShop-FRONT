@@ -2,7 +2,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import {addQuantity} from '../../../actions/cartActions'
+import {addQuantity, deleteItem, refreshItems, substractQuantity} from '../../../actions/cartActions'
+
 
 const useStyles = makeStyles({
     img:{
@@ -21,23 +22,34 @@ const useStyles = makeStyles({
     }
 })
 
-export const EachCartProduct = ({product}) => {
+export const EachCartProduct = ({product, allMoney, setAllMoney}) => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const handleOnAdd = () => {
-      dispatch(addQuantity(product))
+        dispatch(addQuantity(product))
+        dispatch(refreshItems())
     }
-
+    const handleOnSubstract = () =>{
+        if(product.quantity>1){
+            dispatch(substractQuantity(product))
+            dispatch(refreshItems())        
+        }
+        else{
+            dispatch(deleteItem(product))
+            dispatch(refreshItems())
+        }
+    }
     return (
              <>
             <Grid container spacing={6}>
                 <Grid item md={3}>
-                    <img src={product.img} className={classes.img}/>
+                    <img src={product.img} alt={product.name} className={classes.img}/>
                 </Grid>
                 <Grid item md={9} style={{display:'flex', flexDirection:'column'}}>
                     <Typography variant="h6">                    
                         {product.title}
                     </Typography>
+                   
                     <Divider/>
                     <Typography variant="subtitle1">                    
                         {product.description}
@@ -51,8 +63,9 @@ export const EachCartProduct = ({product}) => {
                         </Typography>
                         <ButtonGroup disableElevation variant="outlined" color="primary">
                             <Button onClick={handleOnAdd}>+</Button>
-                            <Button>-</Button>
+                            <Button onClick={handleOnSubstract}>-</Button>
                         </ButtonGroup>
+                         
                     </div>
                 </Grid>
             </Grid>

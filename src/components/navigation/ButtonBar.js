@@ -13,12 +13,13 @@ const useStyles = makeStyles({
 })
 export const ButtonBar = () => {
     const classes = useStyles()
+    
     return (
         <Paper className={classes.bar} variant="outlined" elevation={0}>
-            <Link to="/products" component={Button}>Products</Link>
-            <Link to="/account" component={Button}>My Account</Link>
-            <Link to="/sales" component={Button}>Hot Sale</Link>
-            <Link to="/about" component={Button}>About</Link>
+            <Button component={Link} to="/products">Products</Button>
+            <Button component={Link} to="/account" >My Account</Button>
+            <Button component={Link} to="/sales" >Hot Sale</Button>
+            <Button component={Link} to="/about" >About</Button>
         </Paper>
     )
 }

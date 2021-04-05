@@ -1,3 +1,5 @@
+import compare from "./compare"
+
 export const addItem = (item) =>{
     
     let allItems = JSON.parse(localStorage.getItem('items'))
@@ -15,6 +17,7 @@ export const addItem = (item) =>{
             const numQuantity = existItem[0].quantity
             existItem[0]['quantity'] = numQuantity+1
             filteredArray.push(...existItem)
+            filteredArray.sort(compare)
             localStorage.setItem('items', JSON.stringify([...filteredArray]))
         }
         else{
@@ -44,7 +47,6 @@ export const allQuantity = () =>{
 
 export const addedItems = (item) => {
     const allItems = JSON.parse(localStorage.getItem('items'))
-    console.log(item)
     if(allItems){
         let filteredArray = allItems.filter((secondBucle) => (secondBucle.id !== item.id ))
         const newItem = {
@@ -52,6 +54,7 @@ export const addedItems = (item) => {
             quantity: item.quantity+1
         }        
         filteredArray.push(newItem)
+        filteredArray.sort(compare)
         localStorage.setItem('items',JSON.stringify(filteredArray))
         return filteredArray
     }
@@ -59,3 +62,31 @@ export const addedItems = (item) => {
         return null
     }
 }
+
+export const substractItems = (item) =>{
+    const allItems = JSON.parse(localStorage.getItem('items'))
+    if(allItems){
+        let filteredArray = allItems.filter((secondBucle) => (secondBucle.id !== item.id ))
+        const newItem = {
+            ...item,
+            quantity: item.quantity-1
+        }        
+        filteredArray.push(newItem)
+        filteredArray.sort(compare)
+        localStorage.setItem('items',JSON.stringify(filteredArray))
+        return filteredArray
+    }
+    else{
+        return null
+    }
+}
+
+export const deleteOneItem = (item) =>{
+    const allItems = JSON.parse(localStorage.getItem('items'))
+    if(allItems){
+        const filteredItems = allItems.filter((eachItem)=>(eachItem.id !== item.id))
+        localStorage.setItem('items', JSON.stringify(filteredItems))
+        return filteredItems
+    }
+}
+

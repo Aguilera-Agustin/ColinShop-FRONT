@@ -1,6 +1,6 @@
 import React from 'react'
 import { ButtonBar } from '../../navigation/ButtonBar'
-import { Container, makeStyles, Typography, Button, Hidden } from '@material-ui/core'
+import { Container, makeStyles, Typography, Button } from '@material-ui/core'
 
 
 
