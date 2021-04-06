@@ -23,6 +23,7 @@ const useStyles = makeStyles({
 export const CartPage = () => {
     const classes = useStyles()
     const allItems = useSelector(state=>state.cart.items)
+    const price = useSelector(state=>state.cart.allMoney)
 
     return (
         <Container className={classes.container}>
@@ -31,7 +32,7 @@ export const CartPage = () => {
                 <Paper variant="outlined" elevation={0} className={classes.paper}>
                     <Typography variant="h5" color="textPrimary" noWrap={true}>Checkout</Typography>
                     <Divider className={classes.divider}/>
-                    <Typography>Total: <b>$0</b></Typography>
+                    <Typography>Total: <b>${price}</b></Typography>
                 </Paper>
             </Grid>
             <Grid item md={9} xs={12}>

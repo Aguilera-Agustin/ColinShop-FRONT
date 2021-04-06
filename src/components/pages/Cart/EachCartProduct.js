@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import {addQuantity, deleteItem, refreshItems, substractQuantity} from '../../../actions/cartActions'
+import { substractItemInCart } from '../../../actions/cartActions';
 
 
 const useStyles = makeStyles({
@@ -22,22 +22,14 @@ const useStyles = makeStyles({
     }
 })
 
-export const EachCartProduct = ({product, allMoney, setAllMoney}) => {
+export const EachCartProduct = ({product}) => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const handleOnAdd = () => {
-        dispatch(addQuantity(product))
-        dispatch(refreshItems())
+    
     }
     const handleOnSubstract = () =>{
-        if(product.quantity>1){
-            dispatch(substractQuantity(product))
-            dispatch(refreshItems())        
-        }
-        else{
-            dispatch(deleteItem(product))
-            dispatch(refreshItems())
-        }
+        dispatch(substractItemInCart(product))
     }
     return (
              <>

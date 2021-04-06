@@ -1,38 +1,89 @@
-import { addedItems, allQuantity, substractItems, deleteOneItem} from "../helpers/cartHelpers"
 import { types } from "../types/types"
+import compare from "../helpers/compare"
 
-export const refreshItems = () =>({
-    type: types.refreshItems,
-    payload: {
-        items: JSON.parse(localStorage.getItem('items')),
-        quantity: allQuantity()
+
+export const addItemInCart = (newItem) =>{
+    return (dispatch, getState) =>{
+        const allItems = getState().cart.items
+        const newQuantity = getState().cart.allItems+1
+        const newAllItems = filterItemsToAdd(allItems, newItem)
+        dispatch(modifyItems(newAllItems))
+        dispatch(modifyQuantity(newQuantity))
+        dispatch(addMoney(newItem))
     }
-})
+}
 
-export const addQuantity = (item) => ({
-    type: types.addItems,
-    payload: {
-        items: addedItems(item),
+export const substractItemInCart = (myItem) =>{
+    return(dispatch, getState) =>{
+        const allItems = getState().cart.items
+        if(myItem.quantity > 1){
+            const newQuantity = getState().cart.allItems-1
+            const newAllItems = reduceQuantityInItem(allItems, myItem)
+            dispatch(modifyItems(newAllItems))
+            dispatch(modifyQuantity(newQuantity))
+            dispatch(substractMoney(myItem))
+        }else{
+            const filteredItems = allItems.filter(eachItem => eachItem.id !== myItem.id)
+            const newQuantity = getState().cart.allItems-1
+            console.log(filteredItems)
+            dispatch(modifyItems(filteredItems))
+            dispatch(modifyQuantity(newQuantity))
+            dispatch(substractMoney(myItem))
+        }
     }
-})
+}
+const reduceQuantityInItem = (allItems, myItem) =>{
+    let filteredItems = allItems.filter(eachItem => eachItem.id !== myItem.id)
+    const newItem = myItem
+    newItem.quantity = newItem.quantity-1
+    filteredItems.push(newItem)
+    filteredItems.sort(compare)
+    return filteredItems
+}
 
-export const substractQuantity = (item) =>({
-    type: types.substractItems,
+export const addMoney = (newItem) =>({
+    type: types.addMoney,
     payload:{
-        items: substractItems(item)
+        mount: newItem.price
     }
 })
-
-export const deleteItem = (item) =>({
-    type: types.deleteItem,
+export const substractMoney = (newItem) =>({
+    type: types.substractMoney,
     payload:{
-        items: deleteOneItem(item)
+        mount: newItem.price
     }
 })
 
-export const modifyMoney = (money) =>({
-    type: types.modifyMoney,
-    payload: {
-        money
+
+ const modifyItems = (allItems) =>({
+    type: types.modifyItems,
+    payload:{
+        items: allItems
     }
 })
+
+ const modifyQuantity = (newQuantity) =>({
+    type: types.modifyQuantity,
+    payload:{
+        numberOfItems: newQuantity
+    }
+})
+
+const filterItemsToAdd = (allItems, newItem) =>{
+    let existItem = allItems.filter(eachItem => eachItem.id === newItem.id)
+    if(existItem.length > 0){
+        let othersItems = allItems.filter(eachItem => eachItem.id !== newItem.id)
+        existItem[0]['quantity'] = existItem[0].quantity+1
+        othersItems.push(...existItem)
+        othersItems.sort(compare)
+        return othersItems
+    }
+    else{
+        let items = allItems
+        newItem.quantity=1
+        items.push(newItem)
+        items.sort(compare)
+        return items
+    }
+}
+

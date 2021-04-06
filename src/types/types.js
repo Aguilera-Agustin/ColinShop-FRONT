@@ -1,8 +1,10 @@
 export const types = {
     refreshItems : '[CART] Refresh Items',
-    addItems: '[CART] Add item quantity',
+    modifyItems: '[CART] Modify item',
+    modifyQuantity: '[CART] Modify item quantity',
     substractItems: '[CART] Substract item quantity',
     deleteItem: '[CART] Delete item',
-    modifyMoney: '[CART] Modify Money',
+    addMoney: '[CART] Add Money',
+    substractMoney: '[CART] Substract Money',
         
 }

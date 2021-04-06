@@ -1,40 +1,40 @@
-import { allQuantity } from '../helpers/cartHelpers'
 import {types} from '../types/types'
 
 const initialState = {
-    items: JSON.parse(localStorage.getItem('items')),
-    allItems: allQuantity(),
+    items: [],
+    allItems: 0,
     allMoney: 0
 }
 
 const cartReducer = (state=initialState, action) => {
     switch (action.type) {
-        case types.refreshItems:
+        case types.modifyQuantity:
             return {
                 ...state,
-                items: action.payload.items,
-                allItems: action.payload.quantity,
+                allItems: action.payload.numberOfItems
+               
             }
-        case types.addItems:
+        case types.modifyItems:
             return {
                 ...state,
                 items: action.payload.items
             }
-        case types.substractItems:
+        case types.addMoney:
             return {
                 ...state,
-                items: action.payload.items
+                allMoney: state.allMoney+parseFloat(action.payload.mount)
+               
             }
-        case types.deleteItem:
+        case types.substractMoney:
             return {
                 ...state,
-                items: action.payload.items
+                allMoney: state.allMoney-parseFloat(action.payload.mount)
+               
             }
         case types.modifyMoney:
-            console.log(action.payload)
             return {
                 ...state,
-                money: action.payload.money
+               
             }
     
         default:

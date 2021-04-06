@@ -1,8 +1,8 @@
 import { Button, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { refreshItems } from '../../../actions/cartActions'
-import { addItem } from '../../../helpers/cartHelpers'
+import { addItemInCart } from '../../../actions/cartActions'
+
 
 const useStyles = makeStyles({
     img:{
@@ -25,8 +25,7 @@ export const EachProduct = ({product}) => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const handleOnClick =() =>{
-        addItem(product)
-        dispatch(refreshItems())
+        dispatch(addItemInCart(product))
     }
     return (
         <>
