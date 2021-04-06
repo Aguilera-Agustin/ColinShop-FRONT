@@ -25,7 +25,6 @@ export const substractItemInCart = (myItem) =>{
         }else{
             const filteredItems = allItems.filter(eachItem => eachItem.id !== myItem.id)
             const newQuantity = getState().cart.allItems-1
-            console.log(filteredItems)
             dispatch(modifyItems(filteredItems))
             dispatch(modifyQuantity(newQuantity))
             dispatch(substractMoney(myItem))

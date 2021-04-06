@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { substractItemInCart } from '../../../actions/cartActions';
+import { addItemInCart, substractItemInCart } from '../../../actions/cartActions';
 
 
 const useStyles = makeStyles({
@@ -26,7 +26,7 @@ export const EachCartProduct = ({product}) => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const handleOnAdd = () => {
-    
+        dispatch(addItemInCart(product))
     }
     const handleOnSubstract = () =>{
         dispatch(substractItemInCart(product))
