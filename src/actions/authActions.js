@@ -1,4 +1,4 @@
-import { firebase, db } from "../firebase/firebaseConfig"
+import { firebase } from "../firebase/firebaseConfig"
 import { types } from "../types/types"
 
 export const startLoginWithGoogle = () =>{

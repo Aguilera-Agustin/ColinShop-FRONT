@@ -27,7 +27,7 @@ export const SearchPage = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(initGetProducts())
-    }, [])
+    }, [dispatch])
     const classes = useStyles()
     const [sortBy, setSortBy] = useState("")
     const {word} = useParams()
