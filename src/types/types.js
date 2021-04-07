@@ -7,4 +7,7 @@ export const types = {
     addMoney: '[CART] Add Money',
     substractMoney: '[CART] Substract Money',
         
+    getProducts: '[PRODUCTS] Get products',
+    startLoading: '[PRODUCTS] Start loading',
+    endLoading: '[PRODUCTS] End loading',
 }

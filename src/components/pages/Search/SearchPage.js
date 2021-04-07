@@ -1,8 +1,11 @@
 import { Container, Divider, FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
-import products from '../../../assets/exampleItems'
+import { initGetProducts } from '../../../actions/productsActions'
 import { EachProduct } from './EachProduct'
+import Skeleton from '@material-ui/lab/Skeleton';
+
 
 const useStyles = makeStyles({
     container:{
@@ -21,14 +24,21 @@ const useStyles = makeStyles({
 })
 
 export const SearchPage = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(initGetProducts())
+    }, [])
     const classes = useStyles()
     const [sortBy, setSortBy] = useState("")
     const {word} = useParams()
+    const products = useSelector(state => state.product.allProducts)
+    const loading = useSelector(state => state.product.loading)
     const handleOnChange = (e)=>{
         setSortBy(e.target.value)
     }
     return (
-        <Container className={classes.container}>
+        <>
+                <Container className={classes.container}>
             <Grid container  spacing={3}>
                 <Grid item md={3} xs={12}>
                     <Paper variant="outlined" elevation={0} className={classes.paper}>
@@ -47,11 +57,16 @@ export const SearchPage = () => {
                     </Paper>
                 </Grid>
                 <Grid item md={9} xs={12}>
+                    {
+                        loading? (<Skeleton width={500}></Skeleton>) : (
                     <Paper className={classes.paper} variant="outlined" elevation={0}>
-                        {products.map(eachProduct=>((<EachProduct key={eachProduct.id} product={eachProduct}/>)))}
+                            {products.map(eachProduct=>((<EachProduct key={eachProduct.id} product={eachProduct}/>)))}
                     </Paper>
+                        )
+                    }
                 </Grid>
             </Grid>
         </Container>
+        </>
     )
 }
