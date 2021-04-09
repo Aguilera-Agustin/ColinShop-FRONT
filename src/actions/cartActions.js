@@ -25,7 +25,7 @@ export const substractItemInCart = (myItem) =>{
             dispatch(modifyQuantity(newQuantity))
             dispatch(substractMoney(myItem))
         }else{
-            const filteredItems = allItems.filter(eachItem => eachItem.id !== myItem.id)
+            const filteredItems = allItems.filter(eachItem => eachItem.idProduct !== myItem.idProduct)
             const newQuantity = getState().cart.allItems-1
             dispatch(modifyItems(filteredItems))
             dispatch(modifyQuantity(newQuantity))
@@ -34,7 +34,7 @@ export const substractItemInCart = (myItem) =>{
     }
 }
 const reduceQuantityInItem = (allItems, myItem) =>{
-    let filteredItems = allItems.filter(eachItem => eachItem.id !== myItem.id)
+    let filteredItems = allItems.filter(eachItem => eachItem.idProduct !== myItem.idProduct)
     const newItem = myItem
     newItem.quantity = newItem.quantity-1
     filteredItems.push(newItem)
@@ -71,9 +71,9 @@ export const substractMoney = (newItem) =>({
 })
 
 const filterItemsToAdd = (allItems, newItem) =>{
-    let existItem = allItems.filter(eachItem => eachItem.id === newItem.id)
+    let existItem = allItems.filter(eachItem => eachItem.idProduct === newItem.idProduct)
     if(existItem.length > 0){
-        let othersItems = allItems.filter(eachItem => eachItem.id !== newItem.id)
+        let othersItems = allItems.filter(eachItem => eachItem.idProduct !== newItem.idProduct)
         existItem[0]['quantity'] = existItem[0].quantity+1
         othersItems.push(...existItem)
         othersItems.sort(compare)
