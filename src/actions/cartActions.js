@@ -105,7 +105,7 @@ const prepareIds = (allProducts) =>{
     return (dispatch) =>{
         const allIds = []
         allProducts.forEach(element => {
-            if(!element.quantity > element.stock){
+            if(element.quantity < element.stock){
                 for (let index = 0; index < element.quantity; index++) {
                     const requestData = {
                         idProduct : element.idProduct
