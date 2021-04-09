@@ -1,5 +1,7 @@
 import { types } from "../types/types"
 import compare from "../helpers/compare"
+import axios from "axios"
+import { buyProductForUser } from "./authActions"
 
 
 export const addItemInCart = (newItem) =>{
@@ -86,3 +88,33 @@ const filterItemsToAdd = (allItems, newItem) =>{
     }
 }
 
+export const clearActions = () =>({
+    type: types.clearCart
+})
+
+export const buyProducts = (allProducts) =>{
+    return (dispatch) =>{
+       const ids = dispatch(prepareIds(allProducts))
+       axios.put('https://colinshop.herokuapp.com/market/product/buy', ids)
+       .then(res=>res.data&&dispatch(buyProductForUser(allProducts)))
+       .catch(err=>console.log(err))
+    }
+}
+
+const prepareIds = (allProducts) =>{
+    return (dispatch) =>{
+        const allIds = []
+        allProducts.forEach(element => {
+            if(!element.quantity > element.stock){
+                for (let index = 0; index < element.quantity; index++) {
+                    const requestData = {
+                        idProduct : element.idProduct
+                    }
+                    allIds.push(requestData)
+                }
+            }
+        });
+        return(allIds)
+    }
+
+}

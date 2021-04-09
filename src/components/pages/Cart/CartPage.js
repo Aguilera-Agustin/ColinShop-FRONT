@@ -2,6 +2,7 @@ import { Button, Container, Divider, Grid, makeStyles, Paper, Typography } from 
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLoginWithGoogle } from '../../../actions/authActions'
+import { buyProducts } from '../../../actions/cartActions'
 import { EachCartProduct } from './EachCartProduct'
 
 
@@ -34,6 +35,10 @@ export const CartPage = () => {
     const handleOnLogin = () =>{
         dispath(startLoginWithGoogle())
     }
+
+    const handleOnBuy = () =>{
+        dispath(buyProducts(allItems))
+    }
     return (
         <Container className={classes.container}>
         <Grid container  spacing={3}>
@@ -44,7 +49,7 @@ export const CartPage = () => {
                     <Typography>Total: <b>${price}</b></Typography>
                     {
                         user? (
-                            <Button className={classes.button} variant="contained" color="secondary">Buy</Button>
+                            <Button className={classes.button} variant="contained" disabled={!allItems.length>0} color="secondary" onClick={handleOnBuy}>Buy</Button>
                         )
                         :
                         (
@@ -55,7 +60,7 @@ export const CartPage = () => {
             </Grid>
             <Grid item md={9} xs={12}>
                 <Paper className={classes.paper} variant="outlined" elevation={0}>
-                    {allItems.map(eachProduct=>((<EachCartProduct key={eachProduct.id} product={eachProduct}/>)))}
+                    {allItems.map(eachProduct=>((<EachCartProduct key={eachProduct.idProduct} product={eachProduct}/>)))}
                 </Paper>
             </Grid>
         </Grid>

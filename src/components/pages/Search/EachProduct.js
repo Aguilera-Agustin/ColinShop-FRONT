@@ -31,16 +31,20 @@ export const EachProduct = ({product}) => {
         <>
             <Grid container spacing={6}>
                 <Grid item md={3}>
-                    <img alt={product.name} src={product.img} className={classes.img}/>
+                    <img alt={product.name} src={product.image} className={classes.img}/>
                 </Grid>
                 <Grid item md={9} style={{display:'flex', flexDirection:'column'}}>
                     <Typography variant="h6">                    
-                        {product.title}
+                        {product.name.toUpperCase()}
                     </Typography>
                     <Divider/>
-                    <Typography variant="subtitle1">                    
-                        {product.description}
-                    </Typography>
+                    {
+                        (product.description || product.brand)&&(
+                            <Typography variant="subtitle1">                    
+                            {product.description}
+                            </Typography>
+                    )
+                    }
                     <Typography color="textSecondary" variant="subtitle2">                    
                            Stock: {product.stock}
                     </Typography>

@@ -6,6 +6,7 @@ export const types = {
     deleteItem: '[CART] Delete item',
     addMoney: '[CART] Add Money',
     substractMoney: '[CART] Substract Money',
+    clearCart: '[CART] Clear cart',
         
     getProducts: '[PRODUCTS] Get products',
     startLoading: '[PRODUCTS] Start loading',

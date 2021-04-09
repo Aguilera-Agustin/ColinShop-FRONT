@@ -35,17 +35,21 @@ export const EachCartProduct = ({product}) => {
              <>
             <Grid container spacing={6}>
                 <Grid item md={3}>
-                    <img src={product.img} alt={product.name} className={classes.img}/>
+                    <img src={product.image} alt={product.name} className={classes.img}/>
                 </Grid>
                 <Grid item md={9} style={{display:'flex', flexDirection:'column'}}>
                     <Typography variant="h6">                    
-                        {product.title}
+                        {product.name}
                     </Typography>
                    
                     <Divider/>
-                    <Typography variant="subtitle1">                    
-                        {product.description}
-                    </Typography>
+                    {
+                        (product.brand || product.description) && (
+                            <Typography variant="subtitle1">                    
+                                {product.description}
+                            </Typography>
+                        )
+                    }
                     <Typography color="textSecondary" variant="subtitle2">                    
                            Quantity: {product.quantity}
                     </Typography>

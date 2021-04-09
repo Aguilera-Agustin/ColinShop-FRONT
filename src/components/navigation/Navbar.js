@@ -55,7 +55,7 @@ export const Navbar = () => {
                             ColinShop
                         </Typography>
                     </Link>
-                    <SearchBar  value={searchValue} onChange={e=>handleOnChange(e)} className={classes.search}/>
+                    <SearchBar value={searchValue} onChange={e=>handleOnChange(e)} className={classes.search}/>
                     <Link to="/cart">
                         <IconButton style={{color:'white'}}>
                             <Badge badgeContent={cart} color="secondary">

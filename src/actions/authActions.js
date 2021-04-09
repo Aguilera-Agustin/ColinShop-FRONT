@@ -1,5 +1,7 @@
-import { firebase } from "../firebase/firebaseConfig"
+import moment from "moment"
+import { firebase, db } from "../firebase/firebaseConfig"
 import { types } from "../types/types"
+import { clearActions } from "./cartActions"
 
 export const startLoginWithGoogle = () =>{
     return (dispatch)=>{
@@ -15,6 +17,8 @@ export const startLoginWithGoogle = () =>{
             }
             dispatch(login(data))
             dispatch(endLoading())
+            dispatch(setNewCollection(data))
+            dispatch(setItems(data.uid))
         })
         .catch(err=>{
             dispatch(setError(err.message))
@@ -30,6 +34,17 @@ const setError = (err) =>({
     }
 })
 
+const setItems = (uid) =>{
+    return (dispatch) => {
+        console.log("entro")
+        db.collection("users").doc(uid).get()
+        .then(myUser=> {
+            const userData = myUser.data()
+            console.log(userData)
+        })
+    }
+}
+
 const startLoading = () =>({
     type: types.startAuthLoading
 })
@@ -44,3 +59,33 @@ const login = (data) => ({
         user: data
     }
 })
+
+const setNewCollection = ({uid,email}) =>{
+    return(dispatch) =>{
+        db.collection("users").doc(uid).get()
+        .then(eachUser => {
+            const userData = eachUser.data()
+            !userData && db.collection("users").doc(uid).set({email, products:[]}) 
+        })
+        .catch(err => console.log("ERROR"))
+    }
+}
+
+
+export const buyProductForUser = (product) =>{
+    return (dispath, getState) =>{
+        const uid = getState().auth.user.uid
+        db.collection('users').doc(uid).get()
+        .then(myUser=>{
+            let data = myUser.data()
+            const currentDate = moment().format("DD-MM-YYYY")
+            data.products.push(...product)
+            product.map(eachProduct => (
+                eachProduct.date = currentDate 
+            ))
+            db.collection("users").doc(uid).set(data)
+            .then(secRes=> dispath(clearActions()))
+            .catch(secErr => console.log(secErr))
+        })
+    }
+}   

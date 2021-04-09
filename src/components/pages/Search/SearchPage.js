@@ -5,6 +5,7 @@ import { useParams } from 'react-router'
 import { initGetProducts } from '../../../actions/productsActions'
 import { EachProduct } from './EachProduct'
 import Skeleton from '@material-ui/lab/Skeleton';
+import { EachSkullProduct } from './EachSkullProduct'
 
 
 const useStyles = makeStyles({
@@ -24,13 +25,13 @@ const useStyles = makeStyles({
 })
 
 export const SearchPage = () => {
+    const {word} = useParams()
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(initGetProducts())
-    }, [dispatch])
+        dispatch(initGetProducts(word))
+    }, [dispatch, word])
     const classes = useStyles()
     const [sortBy, setSortBy] = useState("")
-    const {word} = useParams()
     const products = useSelector(state => state.product.allProducts)
     const loading = useSelector(state => state.product.loading)
     const handleOnChange = (e)=>{
@@ -43,7 +44,7 @@ export const SearchPage = () => {
                 <Grid item md={3} xs={12}>
                     <Paper variant="outlined" elevation={0} className={classes.paper}>
                         <Typography variant="h5" color="textPrimary" noWrap={true}>{word}</Typography>
-                        <Typography variant="subtitle2" color="textSecondary">36 results</Typography>
+                        <Typography variant="subtitle2" color="textSecondary">{loading?(<Skeleton width={80}/>):(`${products.length} results`)}</Typography>
                         <Divider className={classes.divider}/>
                         <FormControl className={classes.form}>
                             <InputLabel>Sort by</InputLabel>
@@ -58,9 +59,9 @@ export const SearchPage = () => {
                 </Grid>
                 <Grid item md={9} xs={12}>
                     {
-                        loading? (<Skeleton width={500}></Skeleton>) : (
+                        loading? (<><EachSkullProduct/><EachSkullProduct/></>) : (
                     <Paper className={classes.paper} variant="outlined" elevation={0}>
-                            {products.map(eachProduct=>((<EachProduct key={eachProduct.id} product={eachProduct}/>)))}
+                            {products.map(eachProduct=>(eachProduct.stock>1 && (<EachProduct key={eachProduct.idProduct} product={eachProduct}/>)))}
                     </Paper>
                         )
                     }

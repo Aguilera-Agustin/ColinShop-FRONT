@@ -1,15 +1,15 @@
 import { types } from "../types/types"
-import products from "../assets/exampleItems"
+import axios from "axios"
 
-export const initGetProducts = () =>{
+export const initGetProducts = (productName) =>{
     return (dispatch) =>{
         dispatch(startLoading())
-        setTimeout(() => {
-            dispatch(getProducts(products))
-            dispatch(endLoading())
-        }, 3000);
+        dispatch(getProductsFromApi(productName))
+        dispatch(endLoading())
+        
     }
 }
+
 
 
 const getProducts = (products) =>({
@@ -26,3 +26,12 @@ const startLoading = () =>({
 const endLoading = () => ({
     type: types.endLoading
 })
+
+
+export const getProductsFromApi = (myName) =>{
+    return(dispatch)=>{
+        axios.get(`https://colinshop.herokuapp.com/market/product/name/${myName}`)
+        .then(res=>dispatch(getProducts(res.data)))
+        .catch(err => console.log(err.code))
+    }
+}
