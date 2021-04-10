@@ -40,8 +40,7 @@ export const AccountInfo = ({user}) => {
 
     return (
             <>
-                <Grid container className={classes.grid} spacing={3} >
-
+                <Grid container className={classes.grid} spacing={3} justify="center">
                     <Grid item md={4} xs={12} >
                     <Paper className={classes.paper} variant="outlined" elevation={0}>
                         <div className={classes.profileInfoContainer}>
@@ -63,8 +62,8 @@ export const AccountInfo = ({user}) => {
                         </div>
                             </Paper>
                     </Grid>
+                    <Grid item md={6} xs={12}>
                     <Paper className={classes.paper} variant="outlined" elevation={0}>
-                    <Grid item md={12} xs={12}>
                         <Typography align="center" variant="h6">My items</Typography>
                         <Divider/>  
                         {
@@ -74,8 +73,8 @@ export const AccountInfo = ({user}) => {
                                 </List>
                             )
                         }
-                    </Grid>
                         </Paper>
+                    </Grid>
                 </Grid>
             </>)
 }
