@@ -78,3 +78,11 @@ export const buyProductForUser = (product) =>{
         })
     }
 }   
+const logout = () =>({
+    type: types.authLogout
+}  )
+export const startLogout = () =>{
+    return(dispatch)=>{firebase.auth().signOut().then(()=>{
+        dispatch(logout())
+    })}
+}

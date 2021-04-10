@@ -3,8 +3,9 @@ import { Button, Divider, Grid, List, makeStyles, Paper, Typography } from '@mat
 import { CustomListItem } from './CustomListItem';
 import Avatar from '@material-ui/core/Avatar';
 import { setTotalMount } from '../../../helpers/setTotalMount';
-import {  useSelector } from 'react-redux';
+import {  useSelector, useDispatch} from 'react-redux';
 import { getLastDate } from '../../../helpers/getDate';
+import { startLogout } from '../../../actions/authActions';
 
 const useStyles = makeStyles({
     grid:{
@@ -34,10 +35,13 @@ const useStyles = makeStyles({
     }
 })
 export const AccountInfo = ({user}) => {
+    const dispatch = useDispatch()
     const loading = useSelector(state=>state.user.loading)
     const classes = useStyles()
     const allProducts = useSelector(state=>state.user.allProducts)
-
+    const handleOnLogout = () =>{
+        dispatch(startLogout())
+    }
     return (
             <>
                 <Grid container className={classes.grid} spacing={3} justify="center">
@@ -58,7 +62,7 @@ export const AccountInfo = ({user}) => {
                                 )
                             }
                         <div className={classes.profileInfoContainer}>
-                            <Button variant="outlined" style={{marginTop:'1rem', marginBottom:'3rem'}} color="primary">Logout</Button>
+                            <Button variant="outlined" style={{marginTop:'1rem', marginBottom:'3rem'}} color="primary" onClick={handleOnLogout}>Logout</Button>
                         </div>
                             </Paper>
                     </Grid>
