@@ -18,7 +18,6 @@ export const startLoginWithGoogle = () =>{
             dispatch(login(data))
             dispatch(endLoading())
             dispatch(setNewCollection(data))
-            dispatch(setItems(data.uid))
         })
         .catch(err=>{
             dispatch(setError(err.message))
@@ -34,14 +33,6 @@ const setError = (err) =>({
     }
 })
 
-const setItems = (uid) =>{
-    return (dispatch) => {
-        db.collection("users").doc(uid).get()
-        .then(myUser=> {
-            const userData = myUser.data()
-        })
-    }
-}
 
 const startLoading = () =>({
     type: types.startAuthLoading

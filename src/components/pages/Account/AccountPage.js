@@ -38,10 +38,9 @@ export const AccountPage = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const user = useSelector(state=>state.auth.user)
-    const allProducts = useSelector(state=>state.user.allProducts)
     useEffect(() => {
         user&&dispatch(getUserProductsFromGoogle())
-    }, [user])
+    }, [user, dispatch])
     return (
         <Container className={classes.container}>
             {
