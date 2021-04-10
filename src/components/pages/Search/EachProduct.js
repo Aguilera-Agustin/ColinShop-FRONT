@@ -20,8 +20,11 @@ const useStyles = makeStyles({
         margin:'1rem 0'
     },
     chip:{
-        
-        margin: '0.5rem 1rem'
+        marginRight: '0.5rem'
+    },
+    chipContainer:{
+        display:'flex',
+        alignItems:'center'
     }
 })
 
@@ -38,12 +41,14 @@ export const EachProduct = ({product}) => {
                     <img alt={product.name} src={product.image} className={classes.img}/>
                 </Grid>
                 <Grid item md={9} style={{display:'flex', flexDirection:'column'}}>
-                    <Typography variant="h6">                    
-                        {product.name.toUpperCase()}
-                        <Chip className={classes.chip} variant="subtitle1" label={product.brand}/>                    
-                        <Chip className={classes.chip} variant="subtitle1" label={product.brand}/>                    
-                    </Typography>
-                    <Divider/> 
+                    <div className={classes.chipContainer}>
+                        <Typography variant="h6">                    
+                            <Chip size="small" className={classes.chip} color="primary" label={product.brand}/>                    
+                            {product.name.toUpperCase()} 
+                        </Typography>
+                    </div>
+                    
+                    <Divider style={{marginTop:'0.5rem'}}/> 
                             
                          
                     <Typography color="textSecondary" variant="subtitle2">                    
