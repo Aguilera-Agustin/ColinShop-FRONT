@@ -1,4 +1,4 @@
-import { Button, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Button, Chip, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addItemInCart } from '../../../actions/cartActions'
@@ -18,6 +18,10 @@ const useStyles = makeStyles({
     },
     buttonDivider:{
         margin:'1rem 0'
+    },
+    chip:{
+        
+        margin: '0.5rem 1rem'
     }
 })
 
@@ -36,15 +40,12 @@ export const EachProduct = ({product}) => {
                 <Grid item md={9} style={{display:'flex', flexDirection:'column'}}>
                     <Typography variant="h6">                    
                         {product.name.toUpperCase()}
+                        <Chip className={classes.chip} variant="subtitle1" label={product.brand}/>                    
+                        <Chip className={classes.chip} variant="subtitle1" label={product.brand}/>                    
                     </Typography>
-                    <Divider/>
-                    {
-                        (product.description || product.brand)&&(
-                            <Typography variant="subtitle1">                    
-                            {product.description}
-                            </Typography>
-                    )
-                    }
+                    <Divider/> 
+                            
+                         
                     <Typography color="textSecondary" variant="subtitle2">                    
                            Stock: {product.stock}
                     </Typography>
