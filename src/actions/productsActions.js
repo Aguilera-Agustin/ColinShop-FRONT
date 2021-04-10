@@ -34,6 +34,13 @@ export const getProductsFromApi = (myName) =>{
             dispatch(getProducts(res.data))
             dispatch(endLoading())
         })
-        .catch(err => console.log(err.code))
+        .catch(err => {
+            dispatch(setNotFound())
+            dispatch(endLoading())
+        })
     }
 }
+
+const setNotFound = () =>({
+    type: types.notFoundProducts
+})

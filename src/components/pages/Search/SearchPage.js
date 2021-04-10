@@ -33,6 +33,7 @@ export const SearchPage = () => {
     const classes = useStyles()
     const [sortBy, setSortBy] = useState("")
     const products = useSelector(state => state.product.allProducts)
+    const notFound = useSelector(state => state.product.notFound)
     const loading = useSelector(state => state.product.loading)
     const handleOnChange = (e)=>{
         setSortBy(e.target.value)
@@ -61,7 +62,11 @@ export const SearchPage = () => {
                     {
                         loading? (<><EachSkullProduct/><EachSkullProduct/></>) : (
                     <Paper className={classes.paper} variant="outlined" elevation={0}>
-                            {products.map(eachProduct=>(eachProduct.stock>1 && (<EachProduct key={eachProduct.idProduct} product={eachProduct}/>)))}
+                            {!notFound? 
+                                products.map(eachProduct=>(eachProduct.stock>1 && (<EachProduct key={eachProduct.idProduct} product={eachProduct}/>)))
+                            :
+                            <Typography>Product not found</Typography>
+                            }
                     </Paper>
                         )
                     }

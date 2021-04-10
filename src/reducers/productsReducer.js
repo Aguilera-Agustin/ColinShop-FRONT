@@ -2,7 +2,8 @@ import {types} from '../types/types'
 
 const initialState = {
     allProducts: [],
-    loading: false
+    loading: false,
+    notFound: false
 }
 
 const productReducer = (state=initialState, action) => {
@@ -10,19 +11,27 @@ const productReducer = (state=initialState, action) => {
         case types.getProducts:
             return {
                 ...state,
-                allProducts: action.payload.products
+                allProducts: action.payload.products,
+                notFound: false
             }
         case types.startLoading:
             return{
                 ...state,
-                loading: true
+                loading: true,
+                notFound: false
             }
         case types.endLoading:
             return{
                 ...state,
                 loading: false
             }
-       
+        
+        case types.notFoundProducts:
+            return{
+                ...state,
+                allProducts:[],
+                notFound: true
+            }
     
         default:
             return state;

@@ -11,6 +11,7 @@ export const types = {
     getProducts: '[PRODUCTS] Get products',
     startLoading: '[PRODUCTS] Start loading',
     endLoading: '[PRODUCTS] End loading',
+    notFoundProducts: '[PRODUCTS] Not Found',
 
     startAuthLoading: '[AUTH] Start Loading',
     endAuthLoading : '[AUTH] End Loading',
