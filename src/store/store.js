@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import authReducer from '../reducers/authReducer';
 import cartReducer from '../reducers/cartReducer';
 import productReducer from '../reducers/productsReducer';
+import userReducer from '../reducers/userReducer';
 
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -11,7 +12,8 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 const reducers = combineReducers({
     cart: cartReducer,
     product: productReducer,
-    auth: authReducer
+    auth: authReducer,
+    user: userReducer
 })
 
 export const store = createStore(

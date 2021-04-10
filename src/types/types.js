@@ -18,4 +18,8 @@ export const types = {
     authLogin: '[AUTH] Login',
     authLogout: '[AUTH] Logout',
     authError: '[AUTH] Set error',
+
+    getUserProducts: '[USER] Get products',
+    startUserLoading: '[USER] Start loading',
+    endUserLoading: '[USER] End loading',
 }

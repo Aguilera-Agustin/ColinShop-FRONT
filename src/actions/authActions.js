@@ -36,11 +36,9 @@ const setError = (err) =>({
 
 const setItems = (uid) =>{
     return (dispatch) => {
-        console.log("entro")
         db.collection("users").doc(uid).get()
         .then(myUser=> {
             const userData = myUser.data()
-            console.log(userData)
         })
     }
 }

@@ -40,7 +40,7 @@ export const SearchPage = () => {
     }
     return (
         <>
-                <Container className={classes.container}>
+        <Container className={classes.container}>
             <Grid container  spacing={3}>
                 <Grid item md={3} xs={12}>
                     <Paper variant="outlined" elevation={0} className={classes.paper}>
