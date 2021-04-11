@@ -6,6 +6,7 @@ import {
   Redirect
 } from "react-router-dom";
 import { Navbar } from "../components/navigation/Navbar";
+import { AboutPage } from "../components/pages/About/AboutPage";
 import { AccountPage } from "../components/pages/Account/AccountPage";
 import { CartPage } from "../components/pages/Cart/CartPage";
 import { HomePage } from '../components/pages/Home/HomePage'
@@ -21,6 +22,7 @@ export const MainRouter = () => {
                         <Route path="/search/:word" component={SearchPage} />
                         <Route path="/cart" component={CartPage}/>
                         <Route path="/account" component={AccountPage}/>
+                        <Route path="/about" component={AboutPage}/>
                         <Redirect to="/index"/>
                     </Switch>
             </>

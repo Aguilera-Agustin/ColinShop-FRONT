@@ -73,7 +73,7 @@ export const buyProductForUser = (product) =>{
                 eachProduct.date = currentDate 
             ))
             db.collection("users").doc(uid).set(data)
-            .then(secRes=> dispath(clearActions()))
+            .then(()=> dispath(clearActions()))
             .catch(secErr => console.log(secErr))
         })
     }
