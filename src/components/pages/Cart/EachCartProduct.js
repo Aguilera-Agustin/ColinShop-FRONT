@@ -39,17 +39,15 @@ export const EachCartProduct = ({product}) => {
                 </Grid>
                 <Grid item md={9} style={{display:'flex', flexDirection:'column'}}>
                     <Typography variant="h6">                    
-                        {product.name}
+                        {product.name.toUpperCase()}
                     </Typography>
                    
                     <Divider/>
-                    {
-                        (product.brand || product.description) && (
-                            <Typography variant="subtitle1">                    
-                                {product.description}
-                            </Typography>
-                        )
-                    }
+                    <Typography variant="subtitle1">                    
+                        {product.brand}
+                    </Typography>
+                        
+                    
                     <Typography color="textSecondary" variant="subtitle2">                    
                            Quantity: {product.quantity}
                     </Typography>
