@@ -35,7 +35,7 @@ export const AboutPage = () => {
     }
     const dataBack = {
         name: 'Ramiro Ambrosetti',
-        role: 'Back end',
+        role: 'Back End',
         img: ramiro,
         description: "Hello! I am Ramiro. In this project my role was to develop a complete and secure REST API, in order to demonstrate my skills inthe  BackEnd. If you liked my work you can contact me through my social networks.",
         linkedin: 'https://www.linkedin.com/in/ramiroambrosetti/',
