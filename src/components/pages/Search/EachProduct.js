@@ -1,4 +1,4 @@
-import { Button, Chip, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Button, ButtonGroup, Chip, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addItemInCart } from '../../../actions/cartActions'
@@ -58,9 +58,14 @@ export const EachProduct = ({product}) => {
                         <Typography variant="h6">
                             ${product.price}
                         </Typography>
+                        <ButtonGroup  aria-label="outlined primary button group">
+                        <Button variant="outlined" href={product.description} disableElevation size="small" color="secondary">
+                            DETAILS
+                        </Button>
                         <Button variant="contained" onClick={handleOnClick} disableElevation size="small" color="secondary">
                             ADD TO CART
                         </Button>
+                        </ButtonGroup>
                     </div>
                 </Grid>
             </Grid>
