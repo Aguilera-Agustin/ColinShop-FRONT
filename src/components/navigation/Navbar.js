@@ -1,4 +1,4 @@
-import { AppBar, Badge, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Badge, Grid, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core'
 import React, {  useState } from 'react'
 import SearchBar from "material-ui-search-bar";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -11,18 +11,15 @@ const useStyles = makeStyles({
        
     }, 
     toolbar:{
-        display:'flex',
-        justifyContent:'space-between',
+        
     },
     search:{
-        width:"60%",
+        width:"100%",
         borderRadius:0,
     },
-    iconGroup:{
-        display:'flex', 
-        alignItems:'center', 
-        backgroundColor:'red',
-      
+    logoContainer:{
+        display:'flex',
+        justifyContent:'flex-end'
     }
 })
 
@@ -50,19 +47,27 @@ export const Navbar = () => {
 
             <AppBar position="static" className={classes.appBar}>
                 <Toolbar className={classes.toolbar}>
-                    <Link to="/" style={{color:'white', textDecoration:'none'}}>
-                        <Typography variant="h6">
-                            ColinShop
-                        </Typography>
-                    </Link>
+                    <Grid container alignItems="center" alignItems="center">    
+                    <Grid item md={2} xs={12}>
+                        <Link to="/" style={{color:'white', textDecoration:'none'}}>
+                            <Typography variant="h6">
+                                ColinShop
+                            </Typography>
+                        </Link>
+                    </Grid>
+                    <Grid item md={8} xs={10}>
                     <SearchBar value={searchValue} onChange={e=>handleOnChange(e)} className={classes.search}/>
-                    <Link to="/cart">
-                        <IconButton style={{color:'white'}}>
-                            <Badge badgeContent={cart} color="secondary">
-                                <ShoppingCartIcon/>                  
-                            </Badge>
-                        </IconButton>
-                    </Link>
+                    </Grid>
+                    <Grid item md={2}  className={classes.logoContainer}>
+                        <Link to="/cart">
+                            <IconButton style={{color:'white'}}>
+                                <Badge badgeContent={cart} color="secondary">
+                                    <ShoppingCartIcon/>                  
+                                </Badge>
+                            </IconButton>
+                        </Link>
+                    </Grid>
+                    </Grid>
                 </Toolbar>
             </AppBar>
         </form>
