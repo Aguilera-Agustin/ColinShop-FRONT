@@ -47,7 +47,7 @@ export const Navbar = () => {
 
             <AppBar position="static" className={classes.appBar}>
                 <Toolbar className={classes.toolbar}>
-                    <Grid container alignItems="center" alignItems="center">    
+                    <Grid container alignItems="center">    
                     <Grid item md={2} xs={12}>
                         <Link to="/" style={{color:'white', textDecoration:'none'}}>
                             <Typography variant="h6">
